@@ -18,9 +18,7 @@ import {
 } from '@expo-google-fonts/dev';
 import {
   kMonsterrat_B6,
-  kMonsterrat_B7,
   kMonsterrat_M6,
-  kMonsterrat_M7,
   kNunito_R6,
   kNunito_SB3,
   kReadexPro_R1,
@@ -28,15 +26,17 @@ import {
 } from '../utils/constanta';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 const LoginPage = () => {
+  const router = useRouter();
+
   let [fontLoaded] = useFonts({
-    ReadexPro_400Regular: ReadexPro_400Regular,
-    Nunito_400Regular: Nunito_400Regular,
-    Nunito_600SemiBold: Nunito_600SemiBold,
-    Montserrat_500Medium: Montserrat_500Medium,
-    Montserrat_700Bold: Montserrat_700Bold,
+    ReadexPro_400Regular,
+    Nunito_400Regular,
+    Nunito_600SemiBold,
+    Montserrat_500Medium,
+    Montserrat_700Bold,
   });
 
   const [emailOrName, setEmailOrName] = useState('');
@@ -105,29 +105,14 @@ const LoginPage = () => {
           />
         </Pressable>
       </View>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={[kMonsterrat_M7, { marginTop: '2.5%', color: 'white' }]}>
-          FORGOT YOUR{' '}
-          <Link href="">
-            <Text
-              style={[
-                kMonsterrat_B7,
-                { color: 'white', textDecorationLine: 'underline' },
-              ]}
-            >
-              PASSWORD?
-            </Text>
-          </Link>
-        </Text>
-      </View>
       <Pressable
         style={[
           styles.button,
-          { marginTop: '45.5%' },
+          { marginTop: '56.25%' },
           buttonDisabled && { opacity: 0.5 },
         ]}
         disabled={buttonDisabled}
-        onPress={() => {}}
+        onPress={() => router.push('/')}
       >
         <Text style={kNunito_SB3}>LOGIN</Text>
       </Pressable>

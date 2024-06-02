@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import LoginPage from './login';
+import Home from './home';
 
 export default function App() {
   return (
     <>
-      <LoginPage />
+      <Home />
       <StatusBar style="auto" />
     </>
   );
