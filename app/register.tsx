@@ -1,18 +1,40 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { kMonsterrat_B6, kMonsterrat_M6, kNunito_R6, kNunito_SB3, kReadexPro_R1, kReadexPro_R5 } from '../utils/constanta';
-import { useFonts, ReadexPro_400Regular, Nunito_400Regular, Nunito_600SemiBold, Montserrat_500Medium, Montserrat_700Bold } from "@expo-google-fonts/dev";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import {
+  kMonsterrat_B6,
+  kMonsterrat_M6,
+  kNunito_R6,
+  kNunito_SB3,
+  kReadexPro_R1,
+  kReadexPro_R5,
+} from '../utils/constanta';
+import {
+  useFonts,
+  ReadexPro_400Regular,
+  Nunito_400Regular,
+  Nunito_600SemiBold,
+  Montserrat_500Medium,
+  Montserrat_700Bold,
+} from '@expo-google-fonts/dev';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
+import { Link } from 'expo-router';
 
 const RegisterPage = () => {
   let [fontLoaded] = useFonts({
-    ReadexPro_400Regular,
-    Nunito_400Regular,
-    Nunito_600SemiBold,
-    Montserrat_500Medium,
-    Montserrat_700Bold,
+    ReadexPro_400Regular: ReadexPro_400Regular,
+    Nunito_400Regular: Nunito_400Regular,
+    Nunito_600SemiBold: Nunito_600SemiBold,
+    Montserrat_500Medium: Montserrat_500Medium,
+    Montserrat_700Bold: Montserrat_700Bold,
   });
 
   const [email, setEmail] = useState('');
@@ -43,8 +65,7 @@ const RegisterPage = () => {
       !loading
     ) {
       setButtonDisabled(false);
-    }
-    else {
+    } else {
       setButtonDisabled(true);
     }
   }, [email, name, password, confirmPassword, loading]);
@@ -56,50 +77,44 @@ const RegisterPage = () => {
         style={styles.background}
       />
       <View style={styles.logo}>
-        <Image
-          source={require('../assets/images/menyala-logo.png')}
-        />  
+        <Image source={require('../assets/images/menyala-logo.png')} />
         <Text style={[kReadexPro_R1, { color: 'white' }]}>M E N Y A L A</Text>
       </View>
       <View style={{ alignItems: 'center' }}>
-        <Text style={[kReadexPro_R5, { marginBottom: '5%', color: 'white' }]}>C R E A T E   Y O U R   A C C O U N T</Text>
+        <Text style={[kReadexPro_R5, { marginBottom: '5%', color: 'white' }]}>
+          C R E A T E   Y O U R   A C C O U N T
+        </Text>
       </View>
-      <Text style={styles.inputLabel}>
-        Email
-      </Text>
+      <Text style={styles.inputLabel}>Email</Text>
       <TextInput
         style={styles.inputContainer}
-        autoCapitalize='none'
+        autoCapitalize="none"
         autoCorrect={false}
-        keyboardType='email-address'
-        placeholder='Email address'
+        keyboardType="email-address"
+        placeholder="Email address"
         placeholderTextColor={'#272727'}
         value={email}
         onChangeText={setEmail}
       />
-      <Text style={styles.inputLabel}>
-        Name
-      </Text>
+      <Text style={styles.inputLabel}>Name</Text>
       <TextInput
         style={styles.inputContainer}
-        autoCapitalize='none'
+        autoCapitalize="none"
         autoCorrect={false}
-        keyboardType='default'
-        placeholder='Name'
+        keyboardType="default"
+        placeholder="Name"
         placeholderTextColor={'#272727'}
         value={name}
         onChangeText={setName}
       />
-      <Text style={styles.inputLabel}>
-        Password
-      </Text>
+      <Text style={styles.inputLabel}>Password</Text>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.inputField}
-          autoCapitalize='none'
+          autoCapitalize="none"
           autoCorrect={false}
-          keyboardType='default'
-          placeholder='Password'
+          keyboardType="default"
+          placeholder="Password"
           placeholderTextColor={'#272727'}
           value={password}
           onChangeText={setPassword}
@@ -113,16 +128,14 @@ const RegisterPage = () => {
           />
         </Pressable>
       </View>
-      <Text style={styles.inputLabel}>
-        Confirm Password
-      </Text>
+      <Text style={styles.inputLabel}>Confirm Password</Text>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.inputField}
-          autoCapitalize='none'
+          autoCapitalize="none"
           autoCorrect={false}
-          keyboardType='default'
-          placeholder='Confirm Your Password'
+          keyboardType="default"
+          placeholder="Confirm Your Password"
           placeholderTextColor={'#272727'}
           value={confirmPassword}
           onChangeText={setConfirmPassword}
@@ -137,7 +150,11 @@ const RegisterPage = () => {
         </Pressable>
       </View>
       <Pressable
-        style={[styles.button, { marginTop: '25.75%' }, buttonDisabled && { opacity: 0.5 },]}
+        style={[
+          styles.button,
+          { marginTop: '25.75%' },
+          buttonDisabled && { opacity: 0.5 },
+        ]}
         disabled={buttonDisabled}
         onPress={() => {}}
       >
@@ -146,9 +163,16 @@ const RegisterPage = () => {
       <View style={{ alignItems: 'center' }}>
         <Text style={[kMonsterrat_M6, { marginTop: '2.25%', color: 'white' }]}>
           ALREADY HAVE AN ACCOUNT?{' '}
-          <Pressable onPress={() => {}}>
-            <Text style={[kMonsterrat_B6, { color: 'white', textDecorationLine: 'underline' }]}>LOGIN</Text>
-          </Pressable>
+          <Link href="/login">
+            <Text
+              style={[
+                kMonsterrat_B6,
+                { color: 'white', textDecorationLine: 'underline' },
+              ]}
+            >
+              LOGIN
+            </Text>
+          </Link>
         </Text>
       </View>
     </View>
