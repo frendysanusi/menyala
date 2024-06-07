@@ -78,7 +78,9 @@ const RegisterPage = () => {
       />
       <View style={styles.logo}>
         <Image source={require('../assets/images/menyala-logo.png')} />
-        <Text style={[kReadexPro_R1, { color: 'white' }]}>{'MENYALA'.split('').join(' ')}</Text>
+        <Text style={[kReadexPro_R1, { color: 'white' }]}>
+          {'MENYALA'.split('').join(' ')}
+        </Text>
       </View>
       <View style={{ alignItems: 'center' }}>
         <Text style={[kReadexPro_R5, { marginBottom: '5%', color: 'white' }]}>

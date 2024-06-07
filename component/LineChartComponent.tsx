@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimensions, View, Text, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 
-const screenWidth = 7/8 * Dimensions.get('window').width;
+const screenWidth = (7 / 8) * Dimensions.get('window').width;
 
 // dummy data
 const data = {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     paddingTop: '2.75%',
-  }
+  },
 });
 
 export default LineChartComponent;
