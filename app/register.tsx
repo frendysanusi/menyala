@@ -78,11 +78,11 @@ const RegisterPage = () => {
       />
       <View style={styles.logo}>
         <Image source={require('../assets/images/menyala-logo.png')} />
-        <Text style={[kReadexPro_R1, { color: 'white' }]}>M E N Y A L A</Text>
+        <Text style={[kReadexPro_R1, { color: 'white' }]}>{'MENYALA'.split('').join(' ')}</Text>
       </View>
       <View style={{ alignItems: 'center' }}>
         <Text style={[kReadexPro_R5, { marginBottom: '5%', color: 'white' }]}>
-          C R E A T E   Y O U R   A C C O U N T
+          {'CREATE YOUR ACCOUNT'.split('').join(' ')}
         </Text>
       </View>
       <Text style={styles.inputLabel}>Email</Text>

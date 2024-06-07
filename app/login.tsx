@@ -66,11 +66,11 @@ const LoginPage = () => {
       />
       <View style={styles.logo}>
         <Image source={require('../assets/images/menyala-logo.png')} />
-        <Text style={[kReadexPro_R1, { color: 'white' }]}>M E N Y A L A</Text>
+        <Text style={[kReadexPro_R1, { color: 'white' }]}>{'MENYALA'.split('').join(' ')}</Text>
       </View>
       <View style={{ alignItems: 'center' }}>
         <Text style={[kReadexPro_R5, { marginBottom: '17%', color: 'white' }]}>
-          A L R E A D Y   A N   U S E R ?
+          {'ALREADY AN USER?'.split('').join(' ')}
         </Text>
       </View>
       <Text style={styles.inputLabel}>Email or Name</Text>

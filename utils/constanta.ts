@@ -51,6 +51,10 @@ export const kNunito_R6 = {
   fontSize: 10,
   fontFamily: 'Nunito_400Regular',
 }
+export const kNunito_R7 = {
+  fontSize: 17,
+  fontFamily: 'Nunito_400Regular',
+}
 
 // Nunito SemiBold Fonts
 export const kNunito_SB1 = {
