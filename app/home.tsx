@@ -23,6 +23,7 @@ import {
   useFonts,
 } from '@expo-google-fonts/dev';
 import LineChartComponent from '../component/LineChartComponent';
+import { router } from 'expo-router';
 
 const Home = () => {
   let [fontLoaded] = useFonts({
@@ -105,7 +106,7 @@ const Home = () => {
             {'MENYALA'.split('').join(' ')}
           </Text>
         </View>
-        <Pressable onPress={() => {}} style={styles.logout}>
+        <Pressable onPress={() => {router.push('/')}} style={styles.logout}>
           <MaterialCommunityIcons name="logout" size={25} color="black" />
         </Pressable>
       </View>

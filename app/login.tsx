@@ -114,7 +114,7 @@ const LoginPage = () => {
           buttonDisabled && { opacity: 0.5 },
         ]}
         disabled={buttonDisabled}
-        onPress={() => router.push('/')}
+        onPress={() => router.push('/home')}
       >
         <Text style={kNunito_SB3}>LOGIN</Text>
       </Pressable>
@@ -139,7 +139,7 @@ const LoginPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 25,
+    paddingHorizontal: '6.25%',
     height: '100%',
   },
 

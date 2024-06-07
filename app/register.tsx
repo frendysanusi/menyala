@@ -26,7 +26,7 @@ import {
 } from '@expo-google-fonts/dev';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 
 const RegisterPage = () => {
   let [fontLoaded] = useFonts({
@@ -158,7 +158,7 @@ const RegisterPage = () => {
           buttonDisabled && { opacity: 0.5 },
         ]}
         disabled={buttonDisabled}
-        onPress={() => {}}
+        onPress={() => {router.push('/login')}}
       >
         <Text style={kNunito_SB3}>CREATE ACCOUNT</Text>
       </Pressable>

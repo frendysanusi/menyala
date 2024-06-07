@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { LogBox } from 'react-native';
-import Home from './home';
+import LoginPage from './login';
 
 LogBox.ignoreAllLogs();
 
 export default function App() {
   return (
     <>
-      <Home />
+      <LoginPage />
       <StatusBar style="auto" />
     </>
   );
