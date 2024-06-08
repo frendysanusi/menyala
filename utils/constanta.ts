@@ -3,6 +3,10 @@ export const kReadexPro_L5 = {
   fontSize: 12,
   fontFamily: 'ReadexPro_300Light',
 };
+export const kReadexPro_L6 = {
+  fontSize: 9.5,
+  fontFamily: 'ReadexPro_300Light',
+};
 
 // Readex Pro Regular fonts
 export const kReadexPro_R1 = {
@@ -27,6 +31,10 @@ export const kReadexPro_R5 = {
 };
 export const kReadexPro_R6 = {
   fontSize: 35,
+  fontFamily: 'ReadexPro_400Regular',
+};
+export const kReadexPro_R7 = {
+  fontSize: 32,
   fontFamily: 'ReadexPro_400Regular',
 };
 
@@ -57,6 +65,10 @@ export const kNunito_R6 = {
 };
 export const kNunito_R7 = {
   fontSize: 17,
+  fontFamily: 'Nunito_400Regular',
+};
+export const kNunito_R8 = {
+  fontSize: 24,
   fontFamily: 'Nunito_400Regular',
 };
 
@@ -99,6 +111,10 @@ export const kNunito_B6 = {
   fontSize: 12,
   fontFamily: 'Nunito_700Bold',
 };
+export const kNunito_B7 = {
+  fontSize: 36,
+  fontFamily: 'Nunito_700Bold',
+};
 
 // Nunito Extra Bold Fonts
 export const kNunito_EB1 = {
@@ -123,6 +139,14 @@ export const kNunito_EB5 = {
 };
 export const kNunito_EB6 = {
   fontSize: 12,
+  fontFamily: 'Nunito_800ExtraBold',
+};
+export const kNunito_EB7 = {
+  fontSize: 24,
+  fontFamily: 'Nunito_800ExtraBold',
+};
+export const kNunito_EB8 = {
+  fontSize: 32,
   fontFamily: 'Nunito_800ExtraBold',
 };
 
