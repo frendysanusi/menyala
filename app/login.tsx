@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   TextInput,
+  Platform,
 } from 'react-native';
 import {
   useFonts,
@@ -23,6 +24,7 @@ import {
   kNunito_SB3,
   kReadexPro_R1,
   kReadexPro_R5,
+  kReadexPro_R6,
 } from '../utils/constanta';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
@@ -44,6 +46,9 @@ const LoginPage = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
 
+  const platform = Platform.OS;
+  const isWebPlatform = platform === 'web';
+
   const {
     passwordVisibility,
     eyeIcon: passwordEyeIcon,
@@ -59,79 +64,109 @@ const LoginPage = () => {
   }, [emailOrName, password, loading]);
 
   return (
-    <View style={styles.container}>
+    <View style={isWebPlatform ? styles.containerWeb : styles.container}>
       <LinearGradient
         colors={['#0A0F33', '#195B02']}
         style={styles.background}
       />
-      <View style={styles.logo}>
-        <Image source={require('../assets/images/menyala-logo.png')} />
-        <Text style={[kReadexPro_R1, { color: 'white' }]}>
-          {'MENYALA'.split('').join(' ')}
-        </Text>
+      <View style={isWebPlatform ? styles.logoCardWeb : styles.logoCard}>
+        <View style={styles.logo}>
+          {isWebPlatform ? (
+            <Image source={require('../assets/images/menyala-logo.svg')} />
+          ) : (
+            <Image source={require('../assets/images/menyala-logo.png')} />
+          )}
+          <Text
+            style={[
+              isWebPlatform ? kReadexPro_R6 : kReadexPro_R1,
+              { color: 'white' },
+            ]}
+          >
+            {'MENYALA '.split('').join(' ')}
+          </Text>
+        </View>
       </View>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={[kReadexPro_R5, { marginBottom: '17%', color: 'white' }]}>
-          {'ALREADY AN USER?'.split('').join(' ')}
-        </Text>
-      </View>
-      <Text style={styles.inputLabel}>Email or Name</Text>
-      <TextInput
-        style={styles.inputContainer}
-        autoCapitalize="none"
-        autoCorrect={false}
-        keyboardType="default"
-        placeholder="Email address/Name"
-        placeholderTextColor={'#272727'}
-        value={emailOrName}
-        onChangeText={setEmailOrName}
-      />
-      <Text style={styles.inputLabel}>Password</Text>
-      <View style={styles.inputContainer}>
+      <View style={isWebPlatform ? styles.loginFormWeb : styles.loginForm}>
+        {isWebPlatform && <View style={styles.loginFormWebBackground} />}
+        <View
+          style={{
+            alignItems: 'center',
+            marginBottom: isWebPlatform ? '12.5%' : '17%',
+          }}
+        >
+          <Text style={[kReadexPro_R5, { color: 'white' }]}>
+            {'ALREADY AN USER?'.split('').join(' ')}
+          </Text>
+        </View>
+        <Text style={styles.inputLabel}>Email or Name</Text>
         <TextInput
-          style={styles.inputField}
+          style={styles.inputContainer}
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="default"
-          placeholder="Password"
+          placeholder="Email address/Name"
           placeholderTextColor={'#272727'}
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={passwordVisibility}
+          value={emailOrName}
+          onChangeText={setEmailOrName}
         />
-        <Pressable onPress={handlePasswordVisibility}>
-          <MaterialCommunityIcons
-            name={passwordEyeIcon}
-            size={22}
-            color={'#757575'}
+        <Text style={styles.inputLabel}>Password</Text>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.inputField}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="default"
+            placeholder="Password"
+            placeholderTextColor={'#272727'}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={passwordVisibility}
           />
-        </Pressable>
-      </View>
-      <Pressable
-        style={[
-          styles.button,
-          { marginTop: '56.25%' },
-          buttonDisabled && { opacity: 0.5 },
-        ]}
-        disabled={buttonDisabled}
-        onPress={() => router.push('/home')}
-      >
-        <Text style={kNunito_SB3}>LOGIN</Text>
-      </Pressable>
-      <View style={{ alignItems: 'center' }}>
-        <Text style={[kMonsterrat_M6, { marginTop: '2.25%', color: 'white' }]}>
-          DON'T HAVE AN ACCOUNT YET?{' '}
-          <Link href="/register">
-            <Text
-              style={[
-                kMonsterrat_B6,
-                { color: 'white', textDecorationLine: 'underline' },
-              ]}
-            >
-              REGISTER
-            </Text>
-          </Link>
-        </Text>
+          <Pressable
+            onPress={handlePasswordVisibility}
+            style={{ paddingRight: '3%' }}
+          >
+            <MaterialCommunityIcons
+              name={passwordEyeIcon}
+              size={22}
+              color={'#757575'}
+            />
+          </Pressable>
+        </View>
+        <View
+          style={
+            isWebPlatform ? styles.loginButtonCardWeb : styles.loginButtonCard
+          }
+        >
+          <Pressable
+            style={[
+              styles.button,
+              buttonDisabled && { opacity: 0.5 },
+              isWebPlatform && { width: '80%' },
+            ]}
+            disabled={buttonDisabled}
+            onPress={() => router.push('/home')}
+          >
+            <Text style={kNunito_SB3}>LOGIN</Text>
+          </Pressable>
+        </View>
+        <View style={{ alignItems: 'center' }}>
+          <Text
+            style={[kMonsterrat_M6, { marginTop: '2.25%', color: 'white' }]}
+          >
+            DON'T HAVE AN ACCOUNT YET?{' '}
+            <Link href="/register">
+              <Text
+                style={[
+                  kMonsterrat_B6,
+                  { color: 'white', textDecorationLine: 'underline' },
+                ]}
+              >
+                REGISTER
+              </Text>
+            </Link>
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -143,9 +178,16 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 
-  logo: {
+  loginForm: {
+    height: '100%',
+  },
+
+  logoCard: {
     marginTop: '23.5%',
     marginBottom: '13%',
+  },
+
+  logo: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -167,11 +209,12 @@ const styles = StyleSheet.create({
 
   inputField: {
     width: '90%',
+    height: '100%',
   },
 
   inputContainer: {
     marginBottom: '2.25%',
-    height: '6.25%',
+    height: Platform.OS === 'web' ? '8%' : '6.25%',
     width: '100%',
     color: '#272727',
     backgroundColor: 'white',
@@ -180,17 +223,60 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
 
   button: {
     backgroundColor: '#F6AE0A',
     width: '100%',
-    height: '6%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
     borderColor: 'black',
     borderWidth: 1,
+  },
+
+  loginButtonCard: {
+    marginTop: '56.25%',
+    height: '6.5%',
+  },
+
+  // web styling
+  containerWeb: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: '100%',
+  },
+
+  logoCardWeb: {
+    width: '40%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  loginFormWeb: {
+    justifyContent: 'center',
+    paddingHorizontal: '4%',
+    width: '60%',
+  },
+
+  loginFormWebBackground: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: '100%',
+    backgroundColor: '#A6A6A6',
+    opacity: 0.25,
+    borderTopLeftRadius: 25,
+    borderBottomLeftRadius: 25,
+  },
+
+  loginButtonCardWeb: {
+    marginTop: '12.5%',
+    alignItems: 'center',
+    height: '8%',
   },
 });
 

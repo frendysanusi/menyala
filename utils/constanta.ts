@@ -25,6 +25,10 @@ export const kReadexPro_R5 = {
   fontSize: 12,
   fontFamily: 'ReadexPro_400Regular',
 };
+export const kReadexPro_R6 = {
+  fontSize: 35,
+  fontFamily: 'ReadexPro_400Regular',
+};
 
 // Nunito Regular Fonts
 export const kNunito_R1 = {

@@ -158,7 +158,9 @@ const RegisterPage = () => {
           buttonDisabled && { opacity: 0.5 },
         ]}
         disabled={buttonDisabled}
-        onPress={() => {router.push('/login')}}
+        onPress={() => {
+          router.push('/login');
+        }}
       >
         <Text style={kNunito_SB3}>CREATE ACCOUNT</Text>
       </Pressable>

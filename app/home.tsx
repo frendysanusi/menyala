@@ -106,7 +106,12 @@ const Home = () => {
             {'MENYALA'.split('').join(' ')}
           </Text>
         </View>
-        <Pressable onPress={() => {router.push('/')}} style={styles.logout}>
+        <Pressable
+          onPress={() => {
+            router.push('/');
+          }}
+          style={styles.logout}
+        >
           <MaterialCommunityIcons name="logout" size={25} color="black" />
         </Pressable>
       </View>
