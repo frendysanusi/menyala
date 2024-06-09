@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, View, Text, StyleSheet } from 'react-native';
+import { Dimensions, View, Text, StyleSheet, Platform } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 
 const screenWidth = (7 / 8) * Dimensions.get('window').width;
@@ -28,7 +28,7 @@ const LineChartComponent: React.FC = () => (
   <View style={styles.container}>
     <LineChart
       data={data}
-      width={screenWidth}
+      width={Platform.OS === 'web' ? 0.47*screenWidth : screenWidth}
       height={220}
       chartConfig={chartConfig}
     />

@@ -6,27 +6,28 @@ import {
   Text,
   Image,
   Pressable,
-  ScrollView,
   Platform,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 import {
   kNunito_B3,
   kNunito_B6,
   kNunito_B7,
+  kNunito_EB1,
   kNunito_EB3,
   kNunito_EB6,
   kNunito_EB7,
-  kNunito_EB8,
   kNunito_R4,
   kNunito_R5,
   kNunito_R6,
   kNunito_R7,
-  kNunito_R8,
+  kNunito_R1,
   kReadexPro_L5,
   kReadexPro_L6,
+  kReadexPro_R1,
   kReadexPro_R5,
-  kReadexPro_R7,
+  kNunito_R3,
 } from '../utils/constanta';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {
@@ -101,6 +102,7 @@ const Home = () => {
   });
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       {fireDetected ? (
         <LinearGradient
@@ -123,7 +125,7 @@ const Home = () => {
           {isWebPlatform ? (
             <Image
               source={require('../assets/images/menyala-logo.svg')}
-              style={{ height: '100%', width: '21%', marginRight: '2.5%' }}
+              style={{ height: '100%', width: '12%', marginRight: '2.5%' }}
             />
           ) : (
             <Image
@@ -133,7 +135,7 @@ const Home = () => {
           )}
           <Text
             style={[
-              isWebPlatform ? kReadexPro_R7 : kReadexPro_R5,
+              isWebPlatform ? kReadexPro_R1 : kReadexPro_R5,
               { color: 'white' },
             ]}
           >
@@ -142,7 +144,7 @@ const Home = () => {
         </View>
         {isWebPlatform ? (
           <View style={styles.rightHeaderWeb}>
-            <View style={{ width: '50%' }}>
+            <View style={{ width: '48%' }}>
               <Pressable
                 style={[
                   styles.button,
@@ -163,7 +165,7 @@ const Home = () => {
                 </Text>
               </Pressable>
             </View>
-            <View style={{ width: '50%' }}>
+            <View style={{ width: '48%' }}>
               <Pressable
                 onPress={() => {
                   router.push('/');
@@ -219,12 +221,12 @@ const Home = () => {
       </Text>
       {fireDetected ? (
         <Text
-          style={[isWebPlatform ? kNunito_EB7 : kNunito_B6, { color: 'white' }]}
+          style={[isWebPlatform ? kNunito_EB3 : kNunito_B6, { color: 'white' }]}
         >
           Fire has been detected{' '}
           <Text
             style={[
-              isWebPlatform ? kNunito_R8 : kNunito_R5,
+              isWebPlatform ? kNunito_R3 : kNunito_R5,
               { color: 'CECECE' },
             ]}
           >
@@ -234,14 +236,14 @@ const Home = () => {
       ) : smokeDetected ? (
         <Text
           style={[
-            isWebPlatform ? kNunito_R8 : kNunito_R5,
+            isWebPlatform ? kNunito_R3 : kNunito_R5,
             { color: '#CECECE' },
           ]}
         >
           Caution!{' '}
           <Text
             style={[
-              isWebPlatform ? kNunito_EB7 : kNunito_EB6,
+              isWebPlatform ? kNunito_EB3 : kNunito_EB6,
               { color: 'white' },
             ]}
           >
@@ -252,14 +254,14 @@ const Home = () => {
       ) : (
         <Text
           style={[
-            isWebPlatform ? kNunito_R8 : kNunito_R5,
+            isWebPlatform ? kNunito_R3 : kNunito_R5,
             { color: '#CECECE' },
           ]}
         >
           Currently, the condition of the room is{' '}
           <Text
             style={[
-              isWebPlatform ? kNunito_EB7 : kNunito_EB6,
+              isWebPlatform ? kNunito_EB3 : kNunito_EB6,
               { color: 'white' },
             ]}
           >
@@ -290,99 +292,109 @@ const Home = () => {
       )}
       <Text
         style={[
-          isWebPlatform ? kNunito_EB8 : kNunito_EB3,
+          isWebPlatform ? kNunito_EB7 : kNunito_EB3,
           { color: 'white', marginTop: isWebPlatform ? '2%' : '6.5%' },
         ]}
       >
         Timeline
       </Text>
-      <View style={styles.timeline}>
-        {datesOfWeek.map((date, index) => (
+      <View style={[ isWebPlatform ? {height: '11%', marginTop: '.5%', marginBottom: '.5%'} : {height: '8%', marginTop: '2.5%', marginBottom: '2.5%'}, { alignItems: 'center' }]}>
+        <View style={[styles.timeline, isWebPlatform && {width: '50%'}]}>
+          {datesOfWeek.map((date, index) => (
+            <View
+              key={index}
+              style={{
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                width: '14.28%',
+              }}
+            >
+              <View style={{ alignItems: 'center', justifyContent: 'center', width: '60%', height: '100%' }}>
+                <Text
+                  style={[
+                    kReadexPro_L5,
+                    { marginBottom: '0.75%', color: 'white' },
+                  ]}
+                >
+                  {pressedDate[index] ? datesOfWeek[index].getDate() : ' '}
+                </Text>
+                <Pressable
+                  onPress={() => {
+                    handlePressedDate(index);
+                  }}
+                  style={[
+                    styles.dottedBorderCircle,
+                    pressedDate[index] && { backgroundColor: '#F6AE0A' },
+                  ]}
+                />
+                <Text
+                  style={[kReadexPro_L6, { marginTop: '0.75%', color: 'white' }]}
+                >
+                  {pressedDate[index] ? todayMonth : ' '}
+                </Text>
+              </View>
+              <View style={{ alignItems: 'center', justifyContent: 'center', width: '40%', height: '100%' }}>
+                {index !== datesOfWeek.length - 1 && (
+                  <Text style={styles.dotsHorizontal}>
+                    {'·'.repeat(
+                      Math.floor(
+                        (((0.86 * Dimensions.get('window').width) / 7) * 0.4) / 5,
+                      ),
+                    )}
+                  </Text>
+                )}
+              </View>
+            </View>
+          ))}
+        </View>
+      </View>
+      <View style={isWebPlatform && styles.bodyCardWeb}>
+        <View style={isWebPlatform && styles.realTimeCardWeb}>
+          <Text
+            style={[isWebPlatform ? kNunito_EB7 : kNunito_EB3, { color: 'white' }]}
+          >
+            Real Time Stats
+          </Text>
+          <LineChartComponent />
           <View
-            key={index}
             style={{
-              alignItems: 'center',
-              justifyContent: 'space-between',
               flexDirection: 'row',
-              width: '14.28%',
+              justifyContent: 'space-between',
+              paddingTop: '3.5%',
+              paddingBottom: isWebPlatform ? '0%' : '3.5%',
             }}
           >
-            <View style={{ alignItems: 'center', width: '60%' }}>
-              <Text
-                style={[
-                  kReadexPro_L5,
-                  { marginBottom: '0.75%', color: 'white' },
-                ]}
-              >
-                {pressedDate[index] && datesOfWeek[index].getDate()}
-              </Text>
-              <Pressable
-                onPress={() => {
-                  handlePressedDate(index);
-                }}
-                style={[
-                  styles.dottedBorderCircle,
-                  pressedDate[index] && { backgroundColor: '#F6AE0A' },
-                ]}
-              />
-              <Text
-                style={[kReadexPro_L6, { marginTop: '0.75%', color: 'white' }]}
-              >
-                {pressedDate[index] && todayMonth}
-              </Text>
+            <View style={styles.card}>
+              <Text style={kNunito_R6}>Temperature</Text>
+              <Text style={kNunito_R7}>{currentTemperature}°C</Text>
             </View>
-            <View style={{ alignItems: 'center', width: '40%' }}>
-              {index !== datesOfWeek.length - 1 && (
-                <Text style={styles.dotsHorizontal}>
-                  {'·'.repeat(
-                    Math.floor(
-                      (((0.86 * Dimensions.get('window').width) / 7) * 0.4) / 5,
-                    ),
-                  )}
-                </Text>
-              )}
+            <View style={styles.card}>
+              <Text style={kNunito_R6}>FIre Detector</Text>
+              <Text style={kNunito_R7}>{fireDetected ? '✓' : '-'}</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={kNunito_R6}>Smoke Detector</Text>
+              <Text style={kNunito_R7}>{smokeDetected ? '✓' : '-'}</Text>
             </View>
           </View>
-        ))}
-      </View>
-      <Text
-        style={[isWebPlatform ? kNunito_EB8 : kNunito_EB3, { color: 'white' }]}
-      >
-        Real Time Stats
-      </Text>
-      <LineChartComponent />
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingVertical: '3.5%',
-        }}
-      >
-        <View style={styles.card}>
-          <Text style={kNunito_R6}>Temperature</Text>
-          <Text style={kNunito_R7}>{currentTemperature}°C</Text>
         </View>
-        <View style={styles.card}>
-          <Text style={kNunito_R6}>FIre Detector</Text>
-          <Text style={kNunito_R7}>{fireDetected ? '✓' : '-'}</Text>
+        <View style={isWebPlatform && styles.realTimeCardWeb}>
+          <Text
+            style={[isWebPlatform ? kNunito_EB7 : kNunito_EB3, { color: 'white' }]}
+          >
+            Real Time Situation
+          </Text>
+          <View style={[{ paddingTop: '2.75%', alignItems: 'center', height: '100%' }, !isWebPlatform && {paddingBottom: '22.75%'}]}>
+            <Image
+              source={require('../assets/images/room-example.png')}
+              // style={{ height: '94%', width: '100%' }}
+            />
+          </View>
         </View>
-        <View style={styles.card}>
-          <Text style={kNunito_R6}>Smoke Detector</Text>
-          <Text style={kNunito_R7}>{smokeDetected ? '✓' : '-'}</Text>
-        </View>
-      </View>
-      <Text
-        style={[isWebPlatform ? kNunito_EB8 : kNunito_EB3, { color: 'white' }]}
-      >
-        Real Time Situation
-      </Text>
-      <View style={{ paddingTop: '2.75%', alignItems: 'center' }}>
-        <Image
-          source={require('../assets/images/room-example.png')}
-          style={{ width: '100%' }}
-        />
       </View>
     </View>
+    </ScrollView>
   );
 };
 
@@ -397,12 +409,12 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: '100%',
+    height: '113%',
   },
 
   header: {
     height: Platform.OS === 'web' ? '6.35%' : '4.5%',
-    marginTop: '6.25%',
+    marginTop: Platform.OS === 'web' ? '1.5%' : '6.25%',
     marginBottom: Platform.OS === 'web' ? '1%' : '3.5%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -439,8 +451,8 @@ const styles = StyleSheet.create({
   },
 
   dottedBorderCircle: {
-    width: '100%',
-    height: '55%',
+    width: Platform.OS === 'web' ? '60%' : '100%',
+    height: '40%',
     borderRadius: 50,
     borderWidth: 2,
     borderStyle: 'dotted',
@@ -451,15 +463,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     color: 'white',
     fontWeight: 'bold',
-    // marginHorizontal: 5,
   },
 
   timeline: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: '2.5%',
-    marginBottom: '2.5%',
-    height: '7%',
+    height: '100%',
   },
 
   card: {
@@ -477,6 +486,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: '100%',
     width: '31%',
+  },
+
+  bodyCardWeb : {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  realTimeCardWeb: {
+    width: '48%',
   },
 });
 
