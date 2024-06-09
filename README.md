@@ -53,3 +53,24 @@ Menyala adalah sebuah sistem pendeteksi dini api di suatu ruangan. Sistem ini ak
 
 - React Native v0.74.1
 - Typescript v5.1.3
+
+## How to Run
+1. Clone respository ini
+
+2. Masuk ke directory
+
+```
+cd /menyala
+```
+
+3. Jalankan aplikasi menggunakan command berikut
+
+```
+npm run start
+```
+
+4. Jika membuka melalui Android, buka aplikasi Expo Go dan lakukan scan barcode agar aplikasi dapat digunakan
+
+5. Jika menggunakan web, klik `w` pada terminal, maka website akan terbuka otomatis pada http://localhost:8081/ pada browser Anda
+
+6. File .apk tersedia di releases repo dan dapat diunduh di device Anda
