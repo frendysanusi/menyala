@@ -74,3 +74,22 @@ npm run start
 5. Jika menggunakan web, klik `w` pada terminal, maka website akan terbuka otomatis pada http://localhost:8081/ pada browser Anda
 
 6. File .apk tersedia di releases repo dan dapat diunduh di device Anda
+
+## Website Screenshots
+![Register Page](https://github.com/frendysanusi/menyala/assets/172002512/ae963f46-6012-4619-88c5-4f7de4846ecd)
+![Login Page](https://github.com/frendysanusi/menyala/assets/172002512/47d78088-f586-407c-a6bc-6743b06e08d5)
+![Home Page](https://github.com/frendysanusi/menyala/assets/172002512/28460285-d2b7-49f1-9d71-c7af8065369f)
+![Home Page](https://github.com/frendysanusi/menyala/assets/172002512/f6b0e781-310b-4805-9bcf-cc3458c27ca0)
+
+## Mobile App Screenshots
+
+<table width="100%">
+  <tbody>
+    <tr>
+      <td width="1%"><img src="https://github.com/frendysanusi/menyala/assets/172002512/9cd9e2fd-c2cc-4d03-b9dc-a41c92818723"/></td>
+      <td width="1%"><img src="https://github.com/frendysanusi/menyala/assets/172002512/ec170c9e-c704-4645-8178-b268a2a0b59d"/></td>
+      <td width="1%"><img src="https://github.com/frendysanusi/menyala/assets/172002512/f6a36e2f-87bc-4893-a0c0-20537e4d76f8"/></td>
+      <td width="1%"><img src="https://github.com/frendysanusi/menyala/assets/172002512/f5108177-52e4-4c97-8b94-1bad827cd8ba"/></td>
+    </tr>
+  </tbody>
+</table>
