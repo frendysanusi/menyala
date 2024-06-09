@@ -26,6 +26,7 @@ import {
   kReadexPro_R5,
   kReadexPro_R6,
 } from '../utils/constanta';
+import * as SecureStore from 'expo-secure-store';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
 import { Link, useRouter } from 'expo-router';
@@ -41,7 +42,7 @@ const LoginPage = () => {
     Montserrat_700Bold,
   });
 
-  const [emailOrName, setEmailOrName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -56,12 +57,12 @@ const LoginPage = () => {
   } = useTogglePasswordVisibility();
 
   useEffect(() => {
-    if (emailOrName && password && !loading) {
+    if (email && password && !loading) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [emailOrName, password, loading]);
+  }, [email, password, loading]);
 
   return (
     <View style={isWebPlatform ? styles.containerWeb : styles.container}>
@@ -98,16 +99,16 @@ const LoginPage = () => {
             {'ALREADY AN USER?'.split('').join(' ')}
           </Text>
         </View>
-        <Text style={styles.inputLabel}>Email or Name</Text>
+        <Text style={styles.inputLabel}>Email</Text>
         <TextInput
           style={styles.inputContainer}
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="default"
-          placeholder="Email address/Name"
+          placeholder="Email address"
           placeholderTextColor={'#272727'}
-          value={emailOrName}
-          onChangeText={setEmailOrName}
+          value={email}
+          onChangeText={setEmail}
         />
         <Text style={styles.inputLabel}>Password</Text>
         <View style={styles.inputContainer}>
@@ -145,7 +146,45 @@ const LoginPage = () => {
               isWebPlatform && { width: '80%' },
             ]}
             disabled={buttonDisabled}
-            onPress={() => router.push('/home')}
+            onPress={async () => {
+              try {
+                const resp = await fetch(
+                  'https://menyala-web-service-production.up.railway.app/user/login',
+                  {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'application/json',
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      email: email,
+                      password: password,
+                    }),
+                  },
+                );
+                if (!resp.ok) {
+                  alert('Invalid email or password');
+                  return;
+                }
+                const data = await resp.json();
+                const accessToken = JSON.stringify(
+                  data.data.session.access_token,
+                );
+                const refreshToken = JSON.stringify(
+                  data.data.session.refresh_token,
+                );
+                if (Platform.OS === 'web') {
+                  await localStorage.setItem('accessToken', accessToken);
+                  await localStorage.setItem('refreshToken', refreshToken);
+                } else {
+                  await SecureStore.setItemAsync('accessToken', accessToken);
+                  await SecureStore.setItemAsync('refreshToken', refreshToken);
+                }
+                router.push('/home');
+              } catch (error) {
+                console.log(error);
+              }
+            }}
           >
             <Text style={kNunito_SB3}>LOGIN</Text>
           </Pressable>

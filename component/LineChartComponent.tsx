@@ -28,7 +28,7 @@ const LineChartComponent: React.FC = () => (
   <View style={styles.container}>
     <LineChart
       data={data}
-      width={Platform.OS === 'web' ? 0.47*screenWidth : screenWidth}
+      width={Platform.OS === 'web' ? 0.47 * screenWidth : screenWidth}
       height={220}
       chartConfig={chartConfig}
     />

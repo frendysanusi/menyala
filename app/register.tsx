@@ -40,7 +40,6 @@ const RegisterPage = () => {
   });
 
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -63,7 +62,6 @@ const RegisterPage = () => {
   useEffect(() => {
     if (
       email &&
-      name &&
       password &&
       confirmPassword &&
       password === confirmPassword &&
@@ -73,7 +71,7 @@ const RegisterPage = () => {
     } else {
       setButtonDisabled(true);
     }
-  }, [email, name, password, confirmPassword, loading]);
+  }, [email, password, confirmPassword, loading]);
 
   return (
     <View style={isWebPlatform ? styles.containerWeb : styles.container}>
@@ -122,17 +120,6 @@ const RegisterPage = () => {
           placeholderTextColor={'#272727'}
           value={email}
           onChangeText={setEmail}
-        />
-        <Text style={styles.inputLabel}>Name</Text>
-        <TextInput
-          style={styles.inputContainer}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="default"
-          placeholder="Name"
-          placeholderTextColor={'#272727'}
-          value={name}
-          onChangeText={setName}
         />
         <Text style={styles.inputLabel}>Password</Text>
         <View style={styles.inputContainer}>
@@ -196,8 +183,26 @@ const RegisterPage = () => {
               isWebPlatform && { width: '80%' },
             ]}
             disabled={buttonDisabled}
-            onPress={() => {
-              router.push('/login');
+            onPress={async () => {
+              try {
+                await fetch(
+                  'https://menyala-web-service-production.up.railway.app/user/register',
+                  {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'application/json',
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      email: email,
+                      password: password,
+                    }),
+                  },
+                );
+                router.push('/login');
+              } catch (error) {
+                alert('An error occured');
+              }
             }}
           >
             <Text style={kNunito_SB3}>CREATE ACCOUNT</Text>
