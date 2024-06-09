@@ -83,7 +83,7 @@ const LoginPage = () => {
               { color: 'white' },
             ]}
           >
-            {'MENYALA '.split('').join(' ')}
+            {'MENYALA'.split('').join(' ')}
           </Text>
         </View>
       </View>
@@ -174,8 +174,8 @@ const LoginPage = () => {
                   data.data.session.refresh_token,
                 );
                 if (Platform.OS === 'web') {
-                  await localStorage.setItem('accessToken', accessToken);
-                  await localStorage.setItem('refreshToken', refreshToken);
+                  document.cookie = `access_token=${accessToken}`;
+                  document.cookie = `refresh_token=${refreshToken}`;
                 } else {
                   await SecureStore.setItemAsync('accessToken', accessToken);
                   await SecureStore.setItemAsync('refreshToken', refreshToken);

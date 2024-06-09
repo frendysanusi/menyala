@@ -1,19 +1,8 @@
 import React from 'react';
-import { Dimensions, View, Text, StyleSheet, Platform } from 'react-native';
+import { Dimensions, View, StyleSheet, Platform } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 
 const screenWidth = (7 / 8) * Dimensions.get('window').width;
-
-// dummy data
-const data = {
-  labels: ['9', '10', '11', '12', '13', '14', '15'],
-  datasets: [
-    {
-      data: Array.from({ length: 7 }, () => Math.floor(Math.random() * 100)),
-      strokeWidth: 2,
-    },
-  ],
-};
 
 const chartConfig = {
   backgroundGradientFrom: 'white',
@@ -24,16 +13,45 @@ const chartConfig = {
   useShadowColorFromDataset: false,
 };
 
-const LineChartComponent: React.FC = () => (
-  <View style={styles.container}>
-    <LineChart
-      data={data}
-      width={Platform.OS === 'web' ? 0.47 * screenWidth : screenWidth}
-      height={220}
-      chartConfig={chartConfig}
-    />
-  </View>
-);
+const LineChartComponent = ({ jsonData }: { jsonData: any }) => {
+  const temperatureArr = jsonData.data.map((item: any) => item.temperature);
+  const createdAtArr = jsonData.data.map((item: any) => {
+    const hour = new Date(item.createdAt)
+      .getHours()
+      .toLocaleString('en-US', { minimumIntegerDigits: 2 })
+      .padStart(2, '0');
+    const minute = new Date(item.createdAt)
+      .getMinutes()
+      .toLocaleString('en-US', { minimumIntegerDigits: 2 })
+      .padStart(2, '0');
+    const second = new Date(item.createdAt)
+      .getSeconds()
+      .toLocaleString('en-US', { minimumIntegerDigits: 2 })
+      .padStart(2, '0');
+    return `${hour}:${minute}:${second}`;
+  });
+
+  const data = {
+    labels: createdAtArr,
+    datasets: [
+      {
+        data: temperatureArr,
+        strokeWidth: 2,
+      },
+    ],
+  };
+  return (
+    <View style={styles.container}>
+      <LineChart
+        verticalLabelRotation={-30}
+        data={data}
+        width={Platform.OS === 'web' ? 0.47 * screenWidth : screenWidth}
+        height={220}
+        chartConfig={chartConfig}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
